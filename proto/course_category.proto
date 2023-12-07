@@ -4,6 +4,11 @@ option go_package = "internal/pb";
 
 message blank{}
 
+// Include this message for field selection
+message FieldMask {
+  repeated string included_fields = 1;
+}
+
 message Category {
     string id = 1;
     string name = 2;
@@ -27,6 +32,40 @@ service CategoryService {
     rpc CreateCategory(CreateCategoryRequest) returns (Category) {}
     rpc CreateCategoryStream(stream CreateCategoryRequest) returns (CategoryList) {}
     rpc CreateCategoryStreamBidirectional(stream CreateCategoryRequest) returns (stream Category) {}
-    rpc ListCategories(blank) returns (CategoryList) {}
+    rpc ListCategories(FieldMask) returns (CategoryList) {}
     rpc GetCategory(CategoryGetRequest) returns (Category) {}
+}
+
+message Course {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    
+    message CourseCategory {
+      Category category = 1;
+    }
+
+    CourseCategory course_category = 4;
+}
+
+message CreateCourseRequest {
+    string name = 1;
+    string description = 2;
+    string category_id = 3;
+}
+
+message CourseList {
+    repeated Course courses = 1;
+}
+
+message CourseGetRequest {
+    string id = 1;
+}
+
+service CourseService {
+    rpc CreateCourse(CreateCourseRequest) returns (Course) {}
+    rpc CreateCourseStream(stream CreateCourseRequest) returns (CourseList) {}
+    rpc CreateCourseStreamBidirectional(stream CreateCourseRequest) returns (stream Course) {}
+    rpc ListCourses(blank) returns (CourseList) {}
+    rpc GetCourse(CourseGetRequest) returns (Course) {}
 }

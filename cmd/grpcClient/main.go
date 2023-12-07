@@ -25,7 +25,12 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	categoryList, err := categoryServiceClient.ListCategories(ctx, &pb.Blank{})
+	// Specify the fields you want in the response using a FieldMask
+	fieldMask := &pb.FieldMask{
+		IncludedFields: []string{"name"},
+	}
+
+	categoryList, err := categoryServiceClient.ListCategories(ctx, fieldMask)
 	if err != nil {
 		log.Fatalf("Error getting category list: %v", err)
 	}

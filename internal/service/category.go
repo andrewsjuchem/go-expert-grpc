@@ -34,7 +34,7 @@ func (c *CategoryService) CreateCategory(ctx context.Context, in *pb.CreateCateg
 	return categoryResponse, nil
 }
 
-func (c *CategoryService) ListCategories(ctx context.Context, in *pb.Blank) (*pb.CategoryList, error) {
+func (c *CategoryService) ListCategories(ctx context.Context, in *pb.FieldMask) (*pb.CategoryList, error) {
 	categories, err := c.CategoryDB.FindAll()
 	if err != nil {
 		return nil, err
@@ -43,13 +43,22 @@ func (c *CategoryService) ListCategories(ctx context.Context, in *pb.Blank) (*pb
 	var categoriesResponse []*pb.Category
 
 	for _, category := range categories {
-		categoryResponse := &pb.Category{
-			Id:          category.ID,
-			Name:        category.Name,
-			Description: category.Description,
+
+		filteredCategory := &pb.Category{}
+
+		// Only include fields specified in the request
+		for _, field := range in.IncludedFields {
+			switch field {
+			case "id":
+				filteredCategory.Id = category.ID
+			case "name":
+				filteredCategory.Name = category.Name
+			case "description":
+				filteredCategory.Description = category.Description
+			}
 		}
 
-		categoriesResponse = append(categoriesResponse, categoryResponse)
+		categoriesResponse = append(categoriesResponse, filteredCategory)
 	}
 
 	return &pb.CategoryList{Categories: categoriesResponse}, nil
