@@ -2,12 +2,12 @@
 
 ## Running the app
 
-Start the server
+Starting the server.
 ```
 go run cmd/grpcServer/main.go
 ```
 
-Run the client
+Running the client.
 ```
 go run cmd/grpcClient/main.go
 ```
@@ -26,7 +26,7 @@ CREATE TABLE categories (id string, name string, description);
 CREATE TABLE courses (id string, name string, description, string, category_id string);
 ```
 
-Testing with Evans
+Testing with Evans.
 ```
 evans -r repl
 service CategoryService
