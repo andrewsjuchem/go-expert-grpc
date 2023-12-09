@@ -15,19 +15,26 @@ import (
 )
 
 func main() {
+	// Connect to the database
 	db, err := sql.Open("sqlite3", "./db.sqlite")
 	if err != nil {
 		panic(err)
 	}
 	defer db.Close()
 
+	grpcServer := grpc.NewServer()
+
+	// Category
 	categoryDb := database.NewCategory(db)
 	categoryService := service.NewCategoryService(*categoryDb)
-
-	grpcServer := grpc.NewServer()
 	pb.RegisterCategoryServiceServer(grpcServer, categoryService)
-	reflection.Register(grpcServer)
 
+	// Course
+	courseDb := database.NewCourse(db)
+	courseService := service.NewCourseService(*courseDb)
+	pb.RegisterCourseServiceServer(grpcServer, courseService)
+
+	reflection.Register(grpcServer)
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)

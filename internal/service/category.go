@@ -19,8 +19,18 @@ func NewCategoryService(categoryDB database.Category) *CategoryService {
 	}
 }
 
-func (c *CategoryService) CreateCategory(ctx context.Context, in *pb.CreateCategoryRequest) (*pb.Category, error) {
-	category, err := c.CategoryDB.Create(in.Name, in.Description)
+// Helper function to apply the field mask to a list of categories.
+// func applyFieldMask(categories []*pb.Category, mask *pb.FieldMask) []*pb.Category {
+// 	result := make([]*pb.Category, len(categories))
+// 	for i, category := range categories {
+// 		result[i] = &pb.Category{}
+// 		fieldmaskpb.Merge(category, result[i], mask)
+// 	}
+// 	return result
+// }
+
+func (c *CategoryService) CreateCategory(ctx context.Context, req *pb.CreateCategoryRequest) (*pb.Category, error) {
+	category, err := c.CategoryDB.Create(req.Name, req.Description)
 	if err != nil {
 		return nil, err
 	}
@@ -34,7 +44,7 @@ func (c *CategoryService) CreateCategory(ctx context.Context, in *pb.CreateCateg
 	return categoryResponse, nil
 }
 
-func (c *CategoryService) ListCategories(ctx context.Context, in *pb.FieldMask) (*pb.CategoryList, error) {
+func (c *CategoryService) ListCategories(ctx context.Context, req *pb.FieldMask) (*pb.CategoryList, error) {
 	categories, err := c.CategoryDB.FindAll()
 	if err != nil {
 		return nil, err
@@ -43,29 +53,26 @@ func (c *CategoryService) ListCategories(ctx context.Context, in *pb.FieldMask) 
 	var categoriesResponse []*pb.Category
 
 	for _, category := range categories {
-
-		filteredCategory := &pb.Category{}
-
-		// Only include fields specified in the request
-		for _, field := range in.IncludedFields {
-			switch field {
-			case "id":
-				filteredCategory.Id = category.ID
-			case "name":
-				filteredCategory.Name = category.Name
-			case "description":
-				filteredCategory.Description = category.Description
-			}
+		categoryResponse := &pb.Category{
+			Id:          category.ID,
+			Name:        category.Name,
+			Description: category.Description,
 		}
 
-		categoriesResponse = append(categoriesResponse, filteredCategory)
+		categoriesResponse = append(categoriesResponse, categoryResponse)
 	}
+
+	// // Check if the client has specified a field mask.
+	// if req.IncludedFields != nil {
+	// 	// Extract the specified fields using the FieldMask.
+	// 	categoriesResponse = applyFieldMask(categoriesResponse, req)
+	// }
 
 	return &pb.CategoryList{Categories: categoriesResponse}, nil
 }
 
-func (c *CategoryService) GetCategory(ctx context.Context, in *pb.CategoryGetRequest) (*pb.Category, error) {
-	category, err := c.CategoryDB.Find(in.Id)
+func (c *CategoryService) GetCategory(ctx context.Context, req *pb.CategoryGetRequest) (*pb.Category, error) {
+	category, err := c.CategoryDB.Find(req.Id)
 	if err != nil {
 		return nil, err
 	}

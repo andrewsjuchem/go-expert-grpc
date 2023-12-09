@@ -4,7 +4,6 @@ option go_package = "internal/pb";
 
 message blank{}
 
-// Include this message for field selection
 message FieldMask {
   repeated string included_fields = 1;
 }
@@ -40,12 +39,8 @@ message Course {
     string id = 1;
     string name = 2;
     string description = 3;
-    
-    message CourseCategory {
-      Category category = 1;
-    }
-
-    CourseCategory course_category = 4;
+    string category_id = 4; // Option 1: Use category_id to reference a Category
+    //Category category = 4; // Option 2: Include the whole Category object
 }
 
 message CreateCourseRequest {

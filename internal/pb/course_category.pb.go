@@ -58,6 +58,53 @@ func (*Blank) Descriptor() ([]byte, []int) {
 	return file_proto_course_category_proto_rawDescGZIP(), []int{0}
 }
 
+type FieldMask struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	IncludedFields []string `protobuf:"bytes,1,rep,name=included_fields,json=includedFields,proto3" json:"included_fields,omitempty"`
+}
+
+func (x *FieldMask) Reset() {
+	*x = FieldMask{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_course_category_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *FieldMask) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FieldMask) ProtoMessage() {}
+
+func (x *FieldMask) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_course_category_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FieldMask.ProtoReflect.Descriptor instead.
+func (*FieldMask) Descriptor() ([]byte, []int) {
+	return file_proto_course_category_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *FieldMask) GetIncludedFields() []string {
+	if x != nil {
+		return x.IncludedFields
+	}
+	return nil
+}
+
 type Category struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -71,7 +118,7 @@ type Category struct {
 func (x *Category) Reset() {
 	*x = Category{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_course_category_proto_msgTypes[1]
+		mi := &file_proto_course_category_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -84,7 +131,7 @@ func (x *Category) String() string {
 func (*Category) ProtoMessage() {}
 
 func (x *Category) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_course_category_proto_msgTypes[1]
+	mi := &file_proto_course_category_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -97,7 +144,7 @@ func (x *Category) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Category.ProtoReflect.Descriptor instead.
 func (*Category) Descriptor() ([]byte, []int) {
-	return file_proto_course_category_proto_rawDescGZIP(), []int{1}
+	return file_proto_course_category_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Category) GetId() string {
@@ -133,7 +180,7 @@ type CreateCategoryRequest struct {
 func (x *CreateCategoryRequest) Reset() {
 	*x = CreateCategoryRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_course_category_proto_msgTypes[2]
+		mi := &file_proto_course_category_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -146,7 +193,7 @@ func (x *CreateCategoryRequest) String() string {
 func (*CreateCategoryRequest) ProtoMessage() {}
 
 func (x *CreateCategoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_course_category_proto_msgTypes[2]
+	mi := &file_proto_course_category_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -159,7 +206,7 @@ func (x *CreateCategoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCategoryRequest.ProtoReflect.Descriptor instead.
 func (*CreateCategoryRequest) Descriptor() ([]byte, []int) {
-	return file_proto_course_category_proto_rawDescGZIP(), []int{2}
+	return file_proto_course_category_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CreateCategoryRequest) GetName() string {
@@ -187,7 +234,7 @@ type CategoryList struct {
 func (x *CategoryList) Reset() {
 	*x = CategoryList{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_course_category_proto_msgTypes[3]
+		mi := &file_proto_course_category_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -200,7 +247,7 @@ func (x *CategoryList) String() string {
 func (*CategoryList) ProtoMessage() {}
 
 func (x *CategoryList) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_course_category_proto_msgTypes[3]
+	mi := &file_proto_course_category_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -213,7 +260,7 @@ func (x *CategoryList) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CategoryList.ProtoReflect.Descriptor instead.
 func (*CategoryList) Descriptor() ([]byte, []int) {
-	return file_proto_course_category_proto_rawDescGZIP(), []int{3}
+	return file_proto_course_category_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CategoryList) GetCategories() []*Category {
@@ -234,7 +281,7 @@ type CategoryGetRequest struct {
 func (x *CategoryGetRequest) Reset() {
 	*x = CategoryGetRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_course_category_proto_msgTypes[4]
+		mi := &file_proto_course_category_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -247,7 +294,7 @@ func (x *CategoryGetRequest) String() string {
 func (*CategoryGetRequest) ProtoMessage() {}
 
 func (x *CategoryGetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_course_category_proto_msgTypes[4]
+	mi := &file_proto_course_category_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -260,7 +307,7 @@ func (x *CategoryGetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CategoryGetRequest.ProtoReflect.Descriptor instead.
 func (*CategoryGetRequest) Descriptor() ([]byte, []int) {
-	return file_proto_course_category_proto_rawDescGZIP(), []int{4}
+	return file_proto_course_category_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CategoryGetRequest) GetId() string {
@@ -270,63 +317,15 @@ func (x *CategoryGetRequest) GetId() string {
 	return ""
 }
 
-// Include this message for field selection
-type FieldMask struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	IncludedFields []string `protobuf:"bytes,1,rep,name=included_fields,json=includedFields,proto3" json:"included_fields,omitempty"`
-}
-
-func (x *FieldMask) Reset() {
-	*x = FieldMask{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_course_category_proto_msgTypes[5]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *FieldMask) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FieldMask) ProtoMessage() {}
-
-func (x *FieldMask) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_course_category_proto_msgTypes[5]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FieldMask.ProtoReflect.Descriptor instead.
-func (*FieldMask) Descriptor() ([]byte, []int) {
-	return file_proto_course_category_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *FieldMask) GetIncludedFields() []string {
-	if x != nil {
-		return x.IncludedFields
-	}
-	return nil
-}
-
 type Course struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id             string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name           string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description    string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	CourseCategory *Course_CourseCategory `protobuf:"bytes,4,opt,name=course_category,json=courseCategory,proto3" json:"course_category,omitempty"`
+	Id          string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name        string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	CategoryId  string `protobuf:"bytes,4,opt,name=category_id,json=categoryId,proto3" json:"category_id,omitempty"` // Option 1: Use category_id to reference a Category
 }
 
 func (x *Course) Reset() {
@@ -382,11 +381,11 @@ func (x *Course) GetDescription() string {
 	return ""
 }
 
-func (x *Course) GetCourseCategory() *Course_CourseCategory {
+func (x *Course) GetCategoryId() string {
 	if x != nil {
-		return x.CourseCategory
+		return x.CategoryId
 	}
-	return nil
+	return ""
 }
 
 type CreateCourseRequest struct {
@@ -546,92 +545,39 @@ func (x *CourseGetRequest) GetId() string {
 	return ""
 }
 
-type Course_CourseCategory struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Category *Category `protobuf:"bytes,1,opt,name=category,proto3" json:"category,omitempty"`
-}
-
-func (x *Course_CourseCategory) Reset() {
-	*x = Course_CourseCategory{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_course_category_proto_msgTypes[10]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Course_CourseCategory) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Course_CourseCategory) ProtoMessage() {}
-
-func (x *Course_CourseCategory) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_course_category_proto_msgTypes[10]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Course_CourseCategory.ProtoReflect.Descriptor instead.
-func (*Course_CourseCategory) Descriptor() ([]byte, []int) {
-	return file_proto_course_category_proto_rawDescGZIP(), []int{6, 0}
-}
-
-func (x *Course_CourseCategory) GetCategory() *Category {
-	if x != nil {
-		return x.Category
-	}
-	return nil
-}
-
 var File_proto_course_category_proto protoreflect.FileDescriptor
 
 var file_proto_course_category_proto_rawDesc = []byte{
 	0x0a, 0x1b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x63, 0x6f, 0x75, 0x72, 0x73, 0x65, 0x5f, 0x63,
 	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x02, 0x70,
-	0x62, 0x22, 0x07, 0x0a, 0x05, 0x62, 0x6c, 0x61, 0x6e, 0x6b, 0x22, 0x50, 0x0a, 0x08, 0x43, 0x61,
-	0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65,
-	0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x4d, 0x0a, 0x15,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73,
-	0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
-	0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x3c, 0x0a, 0x0c, 0x43,
-	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x2c, 0x0a, 0x0a, 0x63,
-	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32,
-	0x0c, 0x2e, 0x70, 0x62, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x0a, 0x63,
-	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x22, 0x24, 0x0a, 0x12, 0x43, 0x61, 0x74,
-	0x65, 0x67, 0x6f, 0x72, 0x79, 0x47, 0x65, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22,
-	0x34, 0x0a, 0x09, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x4d, 0x61, 0x73, 0x6b, 0x12, 0x27, 0x0a, 0x0f,
-	0x69, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x64, 0x5f, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x73, 0x18,
-	0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0e, 0x69, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x64, 0x46,
-	0x69, 0x65, 0x6c, 0x64, 0x73, 0x22, 0xce, 0x01, 0x0a, 0x06, 0x43, 0x6f, 0x75, 0x72, 0x73, 0x65,
-	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64,
-	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
-	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74,
-	0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72,
-	0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x42, 0x0a, 0x0f, 0x63, 0x6f, 0x75, 0x72, 0x73, 0x65,
-	0x5f, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x19, 0x2e, 0x70, 0x62, 0x2e, 0x43, 0x6f, 0x75, 0x72, 0x73, 0x65, 0x2e, 0x43, 0x6f, 0x75, 0x72,
-	0x73, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x0e, 0x63, 0x6f, 0x75, 0x72,
-	0x73, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x1a, 0x3a, 0x0a, 0x0e, 0x43, 0x6f,
-	0x75, 0x72, 0x73, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x28, 0x0a, 0x08,
-	0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c,
-	0x2e, 0x70, 0x62, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x08, 0x63, 0x61,
-	0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x22, 0x6c, 0x0a, 0x13, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x62, 0x22, 0x07, 0x0a, 0x05, 0x62, 0x6c, 0x61, 0x6e, 0x6b, 0x22, 0x34, 0x0a, 0x09, 0x46, 0x69,
+	0x65, 0x6c, 0x64, 0x4d, 0x61, 0x73, 0x6b, 0x12, 0x27, 0x0a, 0x0f, 0x69, 0x6e, 0x63, 0x6c, 0x75,
+	0x64, 0x65, 0x64, 0x5f, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09,
+	0x52, 0x0e, 0x69, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x64, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x73,
+	0x22, 0x50, 0x0a, 0x08, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x12, 0x0e, 0x0a, 0x02,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04,
+	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69,
+	0x6f, 0x6e, 0x22, 0x4d, 0x0a, 0x15, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x65,
+	0x67, 0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12,
+	0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f,
+	0x6e, 0x22, 0x3c, 0x0a, 0x0c, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x4c, 0x69, 0x73,
+	0x74, 0x12, 0x2c, 0x0a, 0x0a, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x18,
+	0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x70, 0x62, 0x2e, 0x43, 0x61, 0x74, 0x65, 0x67,
+	0x6f, 0x72, 0x79, 0x52, 0x0a, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x69, 0x65, 0x73, 0x22,
+	0x24, 0x0a, 0x12, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x47, 0x65, 0x74, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x6f, 0x0a, 0x06, 0x43, 0x6f, 0x75, 0x72, 0x73, 0x65, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12,
+	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69,
+	0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69,
+	0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1f, 0x0a, 0x0b, 0x63, 0x61, 0x74, 0x65, 0x67, 0x6f, 0x72,
+	0x79, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x61, 0x74, 0x65,
+	0x67, 0x6f, 0x72, 0x79, 0x49, 0x64, 0x22, 0x6c, 0x0a, 0x13, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
 	0x43, 0x6f, 0x75, 0x72, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x12, 0x0a,
 	0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d,
 	0x65, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e,
@@ -701,50 +647,47 @@ func file_proto_course_category_proto_rawDescGZIP() []byte {
 	return file_proto_course_category_proto_rawDescData
 }
 
-var file_proto_course_category_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_proto_course_category_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_proto_course_category_proto_goTypes = []interface{}{
 	(*Blank)(nil),                 // 0: pb.blank
-	(*Category)(nil),              // 1: pb.Category
-	(*CreateCategoryRequest)(nil), // 2: pb.CreateCategoryRequest
-	(*CategoryList)(nil),          // 3: pb.CategoryList
-	(*CategoryGetRequest)(nil),    // 4: pb.CategoryGetRequest
-	(*FieldMask)(nil),             // 5: pb.FieldMask
+	(*FieldMask)(nil),             // 1: pb.FieldMask
+	(*Category)(nil),              // 2: pb.Category
+	(*CreateCategoryRequest)(nil), // 3: pb.CreateCategoryRequest
+	(*CategoryList)(nil),          // 4: pb.CategoryList
+	(*CategoryGetRequest)(nil),    // 5: pb.CategoryGetRequest
 	(*Course)(nil),                // 6: pb.Course
 	(*CreateCourseRequest)(nil),   // 7: pb.CreateCourseRequest
 	(*CourseList)(nil),            // 8: pb.CourseList
 	(*CourseGetRequest)(nil),      // 9: pb.CourseGetRequest
-	(*Course_CourseCategory)(nil), // 10: pb.Course.CourseCategory
 }
 var file_proto_course_category_proto_depIdxs = []int32{
-	1,  // 0: pb.CategoryList.categories:type_name -> pb.Category
-	10, // 1: pb.Course.course_category:type_name -> pb.Course.CourseCategory
-	6,  // 2: pb.CourseList.courses:type_name -> pb.Course
-	1,  // 3: pb.Course.CourseCategory.category:type_name -> pb.Category
-	2,  // 4: pb.CategoryService.CreateCategory:input_type -> pb.CreateCategoryRequest
-	2,  // 5: pb.CategoryService.CreateCategoryStream:input_type -> pb.CreateCategoryRequest
-	2,  // 6: pb.CategoryService.CreateCategoryStreamBidirectional:input_type -> pb.CreateCategoryRequest
-	5,  // 7: pb.CategoryService.ListCategories:input_type -> pb.FieldMask
-	4,  // 8: pb.CategoryService.GetCategory:input_type -> pb.CategoryGetRequest
-	7,  // 9: pb.CourseService.CreateCourse:input_type -> pb.CreateCourseRequest
-	7,  // 10: pb.CourseService.CreateCourseStream:input_type -> pb.CreateCourseRequest
-	7,  // 11: pb.CourseService.CreateCourseStreamBidirectional:input_type -> pb.CreateCourseRequest
-	0,  // 12: pb.CourseService.ListCourses:input_type -> pb.blank
-	9,  // 13: pb.CourseService.GetCourse:input_type -> pb.CourseGetRequest
-	1,  // 14: pb.CategoryService.CreateCategory:output_type -> pb.Category
-	3,  // 15: pb.CategoryService.CreateCategoryStream:output_type -> pb.CategoryList
-	1,  // 16: pb.CategoryService.CreateCategoryStreamBidirectional:output_type -> pb.Category
-	3,  // 17: pb.CategoryService.ListCategories:output_type -> pb.CategoryList
-	1,  // 18: pb.CategoryService.GetCategory:output_type -> pb.Category
-	6,  // 19: pb.CourseService.CreateCourse:output_type -> pb.Course
-	8,  // 20: pb.CourseService.CreateCourseStream:output_type -> pb.CourseList
-	6,  // 21: pb.CourseService.CreateCourseStreamBidirectional:output_type -> pb.Course
-	8,  // 22: pb.CourseService.ListCourses:output_type -> pb.CourseList
-	6,  // 23: pb.CourseService.GetCourse:output_type -> pb.Course
-	14, // [14:24] is the sub-list for method output_type
-	4,  // [4:14] is the sub-list for method input_type
-	4,  // [4:4] is the sub-list for extension type_name
-	4,  // [4:4] is the sub-list for extension extendee
-	0,  // [0:4] is the sub-list for field type_name
+	2,  // 0: pb.CategoryList.categories:type_name -> pb.Category
+	6,  // 1: pb.CourseList.courses:type_name -> pb.Course
+	3,  // 2: pb.CategoryService.CreateCategory:input_type -> pb.CreateCategoryRequest
+	3,  // 3: pb.CategoryService.CreateCategoryStream:input_type -> pb.CreateCategoryRequest
+	3,  // 4: pb.CategoryService.CreateCategoryStreamBidirectional:input_type -> pb.CreateCategoryRequest
+	1,  // 5: pb.CategoryService.ListCategories:input_type -> pb.FieldMask
+	5,  // 6: pb.CategoryService.GetCategory:input_type -> pb.CategoryGetRequest
+	7,  // 7: pb.CourseService.CreateCourse:input_type -> pb.CreateCourseRequest
+	7,  // 8: pb.CourseService.CreateCourseStream:input_type -> pb.CreateCourseRequest
+	7,  // 9: pb.CourseService.CreateCourseStreamBidirectional:input_type -> pb.CreateCourseRequest
+	0,  // 10: pb.CourseService.ListCourses:input_type -> pb.blank
+	9,  // 11: pb.CourseService.GetCourse:input_type -> pb.CourseGetRequest
+	2,  // 12: pb.CategoryService.CreateCategory:output_type -> pb.Category
+	4,  // 13: pb.CategoryService.CreateCategoryStream:output_type -> pb.CategoryList
+	2,  // 14: pb.CategoryService.CreateCategoryStreamBidirectional:output_type -> pb.Category
+	4,  // 15: pb.CategoryService.ListCategories:output_type -> pb.CategoryList
+	2,  // 16: pb.CategoryService.GetCategory:output_type -> pb.Category
+	6,  // 17: pb.CourseService.CreateCourse:output_type -> pb.Course
+	8,  // 18: pb.CourseService.CreateCourseStream:output_type -> pb.CourseList
+	6,  // 19: pb.CourseService.CreateCourseStreamBidirectional:output_type -> pb.Course
+	8,  // 20: pb.CourseService.ListCourses:output_type -> pb.CourseList
+	6,  // 21: pb.CourseService.GetCourse:output_type -> pb.Course
+	12, // [12:22] is the sub-list for method output_type
+	2,  // [2:12] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_proto_course_category_proto_init() }
@@ -766,7 +709,7 @@ func file_proto_course_category_proto_init() {
 			}
 		}
 		file_proto_course_category_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Category); i {
+			switch v := v.(*FieldMask); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -778,7 +721,7 @@ func file_proto_course_category_proto_init() {
 			}
 		}
 		file_proto_course_category_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateCategoryRequest); i {
+			switch v := v.(*Category); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -790,7 +733,7 @@ func file_proto_course_category_proto_init() {
 			}
 		}
 		file_proto_course_category_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CategoryList); i {
+			switch v := v.(*CreateCategoryRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -802,7 +745,7 @@ func file_proto_course_category_proto_init() {
 			}
 		}
 		file_proto_course_category_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CategoryGetRequest); i {
+			switch v := v.(*CategoryList); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -814,7 +757,7 @@ func file_proto_course_category_proto_init() {
 			}
 		}
 		file_proto_course_category_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FieldMask); i {
+			switch v := v.(*CategoryGetRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -873,18 +816,6 @@ func file_proto_course_category_proto_init() {
 				return nil
 			}
 		}
-		file_proto_course_category_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Course_CourseCategory); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -892,7 +823,7 @@ func file_proto_course_category_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_course_category_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   11,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   2,
 		},
