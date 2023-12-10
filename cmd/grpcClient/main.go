@@ -8,6 +8,7 @@ import (
 	"time"
 
 	pb "github.com/andrewsjuchem/go-expert-grpc/internal/pb"
+	"google.golang.org/genproto/protobuf/field_mask"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -26,15 +27,16 @@ func main() {
 	defer cancel()
 
 	// Specify the fields you want in the response using a FieldMask
-	fieldMask := &pb.FieldMask{
-		IncludedFields: []string{"name"},
+	req := &pb.CategoryGetRequest{
+		Id: "your-category-id", // Replace with your category ID
+		FieldMask: &field_mask.FieldMask{
+			Paths: []string{"id", "name"}, // Replace with the fields you want to include
+		},
 	}
 
-	categoryList, err := categoryServiceClient.ListCategories(ctx, fieldMask)
+	category, err := categoryServiceClient.GetCategory(ctx, req)
 	if err != nil {
 		log.Fatalf("Error getting category list: %v", err)
 	}
-	for _, value := range categoryList.Categories {
-		fmt.Println(value, " ")
-	}
+	fmt.Println(category, " ")
 }

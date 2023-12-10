@@ -25,7 +25,7 @@ type CategoryServiceClient interface {
 	CreateCategory(ctx context.Context, in *CreateCategoryRequest, opts ...grpc.CallOption) (*Category, error)
 	CreateCategoryStream(ctx context.Context, opts ...grpc.CallOption) (CategoryService_CreateCategoryStreamClient, error)
 	CreateCategoryStreamBidirectional(ctx context.Context, opts ...grpc.CallOption) (CategoryService_CreateCategoryStreamBidirectionalClient, error)
-	ListCategories(ctx context.Context, in *FieldMask, opts ...grpc.CallOption) (*CategoryList, error)
+	ListCategories(ctx context.Context, in *Blank, opts ...grpc.CallOption) (*CategoryList, error)
 	GetCategory(ctx context.Context, in *CategoryGetRequest, opts ...grpc.CallOption) (*Category, error)
 }
 
@@ -111,7 +111,7 @@ func (x *categoryServiceCreateCategoryStreamBidirectionalClient) Recv() (*Catego
 	return m, nil
 }
 
-func (c *categoryServiceClient) ListCategories(ctx context.Context, in *FieldMask, opts ...grpc.CallOption) (*CategoryList, error) {
+func (c *categoryServiceClient) ListCategories(ctx context.Context, in *Blank, opts ...grpc.CallOption) (*CategoryList, error) {
 	out := new(CategoryList)
 	err := c.cc.Invoke(ctx, "/pb.CategoryService/ListCategories", in, out, opts...)
 	if err != nil {
@@ -136,7 +136,7 @@ type CategoryServiceServer interface {
 	CreateCategory(context.Context, *CreateCategoryRequest) (*Category, error)
 	CreateCategoryStream(CategoryService_CreateCategoryStreamServer) error
 	CreateCategoryStreamBidirectional(CategoryService_CreateCategoryStreamBidirectionalServer) error
-	ListCategories(context.Context, *FieldMask) (*CategoryList, error)
+	ListCategories(context.Context, *Blank) (*CategoryList, error)
 	GetCategory(context.Context, *CategoryGetRequest) (*Category, error)
 	mustEmbedUnimplementedCategoryServiceServer()
 }
@@ -154,7 +154,7 @@ func (UnimplementedCategoryServiceServer) CreateCategoryStream(CategoryService_C
 func (UnimplementedCategoryServiceServer) CreateCategoryStreamBidirectional(CategoryService_CreateCategoryStreamBidirectionalServer) error {
 	return status.Errorf(codes.Unimplemented, "method CreateCategoryStreamBidirectional not implemented")
 }
-func (UnimplementedCategoryServiceServer) ListCategories(context.Context, *FieldMask) (*CategoryList, error) {
+func (UnimplementedCategoryServiceServer) ListCategories(context.Context, *Blank) (*CategoryList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCategories not implemented")
 }
 func (UnimplementedCategoryServiceServer) GetCategory(context.Context, *CategoryGetRequest) (*Category, error) {
@@ -244,7 +244,7 @@ func (x *categoryServiceCreateCategoryStreamBidirectionalServer) Recv() (*Create
 }
 
 func _CategoryService_ListCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FieldMask)
+	in := new(Blank)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -256,7 +256,7 @@ func _CategoryService_ListCategories_Handler(srv interface{}, ctx context.Contex
 		FullMethod: "/pb.CategoryService/ListCategories",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CategoryServiceServer).ListCategories(ctx, req.(*FieldMask))
+		return srv.(CategoryServiceServer).ListCategories(ctx, req.(*Blank))
 	}
 	return interceptor(ctx, in, info, handler)
 }

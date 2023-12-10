@@ -6,6 +6,7 @@ import (
 
 	"github.com/andrewsjuchem/go-expert-grpc/internal/database"
 	"github.com/andrewsjuchem/go-expert-grpc/internal/pb"
+	"google.golang.org/genproto/protobuf/field_mask"
 )
 
 type CategoryService struct {
@@ -19,15 +20,28 @@ func NewCategoryService(categoryDB database.Category) *CategoryService {
 	}
 }
 
-// Helper function to apply the field mask to a list of categories.
-// func applyFieldMask(categories []*pb.Category, mask *pb.FieldMask) []*pb.Category {
-// 	result := make([]*pb.Category, len(categories))
-// 	for i, category := range categories {
-// 		result[i] = &pb.Category{}
-// 		fieldmaskpb.Merge(category, result[i], mask)
-// 	}
-// 	return result
-// }
+// applyFieldMask applies the field mask to the category and returns a new category
+func applyFieldMask(category *pb.Category, mask *field_mask.FieldMask) *pb.Category {
+	// Create a map for easy lookup
+	includedFields := make(map[string]struct{})
+	for _, path := range mask.GetPaths() {
+		includedFields[path] = struct{}{}
+	}
+
+	// Create a new category with only the included fields
+	newCategory := &pb.Category{}
+	fields := category.ProtoReflect().Descriptor().Fields()
+	for i := 0; i < fields.Len(); i++ {
+		field := fields.Get(i)
+		fieldName := field.Name()
+		if _, included := includedFields[string(fieldName)]; included {
+			value := category.ProtoReflect().Get(field)
+			newCategory.ProtoReflect().Set(field, value)
+		}
+	}
+
+	return newCategory
+}
 
 func (c *CategoryService) CreateCategory(ctx context.Context, req *pb.CreateCategoryRequest) (*pb.Category, error) {
 	category, err := c.CategoryDB.Create(req.Name, req.Description)
@@ -44,7 +58,7 @@ func (c *CategoryService) CreateCategory(ctx context.Context, req *pb.CreateCate
 	return categoryResponse, nil
 }
 
-func (c *CategoryService) ListCategories(ctx context.Context, req *pb.FieldMask) (*pb.CategoryList, error) {
+func (c *CategoryService) ListCategories(ctx context.Context, req *pb.Blank) (*pb.CategoryList, error) {
 	categories, err := c.CategoryDB.FindAll()
 	if err != nil {
 		return nil, err
@@ -62,12 +76,6 @@ func (c *CategoryService) ListCategories(ctx context.Context, req *pb.FieldMask)
 		categoriesResponse = append(categoriesResponse, categoryResponse)
 	}
 
-	// // Check if the client has specified a field mask.
-	// if req.IncludedFields != nil {
-	// 	// Extract the specified fields using the FieldMask.
-	// 	categoriesResponse = applyFieldMask(categoriesResponse, req)
-	// }
-
 	return &pb.CategoryList{Categories: categoriesResponse}, nil
 }
 
@@ -83,6 +91,9 @@ func (c *CategoryService) GetCategory(ctx context.Context, req *pb.CategoryGetRe
 		Description: category.Description,
 	}
 
+	if req.FieldMask != nil {
+		return applyFieldMask(categoryResponse, req.FieldMask), nil
+	}
 	return categoryResponse, nil
 }
 
