@@ -22,6 +22,7 @@ func NewCategoryService(categoryDB database.Category) *CategoryService {
 	}
 }
 
+// https://stackoverflow.com/questions/64739310/how-to-use-protocol-buffer-fieldmask-in-go
 // applyFieldMask applies the field mask to the category and returns a new category
 // func applyFieldMask(category *pb.Category, mask *field_mask.FieldMask) *pb.Category {
 // 	// Create a map for easy lookup
