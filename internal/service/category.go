@@ -6,7 +6,9 @@ import (
 
 	"github.com/andrewsjuchem/go-expert-grpc/internal/database"
 	"github.com/andrewsjuchem/go-expert-grpc/internal/pb"
-	"google.golang.org/genproto/protobuf/field_mask"
+	fmutils "github.com/mennanov/fmutils" // FieldMask library to work with protobuf messages only (not arbitrary structs)
+	// fieldmask_utils "github.com/mennanov/fieldmask-utils" // FieldMask library to work with arbitrary structs
+	// "google.golang.org/genproto/protobuf/field_mask"
 )
 
 type CategoryService struct {
@@ -21,27 +23,27 @@ func NewCategoryService(categoryDB database.Category) *CategoryService {
 }
 
 // applyFieldMask applies the field mask to the category and returns a new category
-func applyFieldMask(category *pb.Category, mask *field_mask.FieldMask) *pb.Category {
-	// Create a map for easy lookup
-	includedFields := make(map[string]struct{})
-	for _, path := range mask.GetPaths() {
-		includedFields[path] = struct{}{}
-	}
+// func applyFieldMask(category *pb.Category, mask *field_mask.FieldMask) *pb.Category {
+// 	// Create a map for easy lookup
+// 	includedFields := make(map[string]struct{})
+// 	for _, path := range mask.GetPaths() {
+// 		includedFields[path] = struct{}{}
+// 	}
 
-	// Create a new category with only the included fields
-	newCategory := &pb.Category{}
-	fields := category.ProtoReflect().Descriptor().Fields()
-	for i := 0; i < fields.Len(); i++ {
-		field := fields.Get(i)
-		fieldName := field.Name()
-		if _, included := includedFields[string(fieldName)]; included {
-			value := category.ProtoReflect().Get(field)
-			newCategory.ProtoReflect().Set(field, value)
-		}
-	}
+// 	// Create a new category with only the included fields
+// 	newCategory := &pb.Category{}
+// 	fields := category.ProtoReflect().Descriptor().Fields()
+// 	for i := 0; i < fields.Len(); i++ {
+// 		field := fields.Get(i)
+// 		fieldName := field.Name()
+// 		if _, included := includedFields[string(fieldName)]; included {
+// 			value := category.ProtoReflect().Get(field)
+// 			newCategory.ProtoReflect().Set(field, value)
+// 		}
+// 	}
 
-	return newCategory
-}
+// 	return newCategory
+// }
 
 func (c *CategoryService) CreateCategory(ctx context.Context, req *pb.CreateCategoryRequest) (*pb.Category, error) {
 	category, err := c.CategoryDB.Create(req.Name, req.Description)
@@ -58,7 +60,7 @@ func (c *CategoryService) CreateCategory(ctx context.Context, req *pb.CreateCate
 	return categoryResponse, nil
 }
 
-func (c *CategoryService) ListCategories(ctx context.Context, req *pb.Blank) (*pb.CategoryList, error) {
+func (c *CategoryService) ListCategories(ctx context.Context, req *pb.CategoryListRequest) (*pb.CategoryList, error) {
 	categories, err := c.CategoryDB.FindAll()
 	if err != nil {
 		return nil, err
@@ -71,6 +73,10 @@ func (c *CategoryService) ListCategories(ctx context.Context, req *pb.Blank) (*p
 			Id:          category.ID,
 			Name:        category.Name,
 			Description: category.Description,
+		}
+
+		if req.FieldMask != nil {
+			fmutils.Filter(categoryResponse, req.FieldMask.Paths)
 		}
 
 		categoriesResponse = append(categoriesResponse, categoryResponse)
@@ -92,7 +98,7 @@ func (c *CategoryService) GetCategory(ctx context.Context, req *pb.CategoryGetRe
 	}
 
 	if req.FieldMask != nil {
-		return applyFieldMask(categoryResponse, req.FieldMask), nil
+		fmutils.Filter(categoryResponse, req.FieldMask.Paths)
 	}
 	return categoryResponse, nil
 }

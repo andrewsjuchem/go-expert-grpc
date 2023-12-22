@@ -25,7 +25,7 @@ type CategoryServiceClient interface {
 	CreateCategory(ctx context.Context, in *CreateCategoryRequest, opts ...grpc.CallOption) (*Category, error)
 	CreateCategoryStream(ctx context.Context, opts ...grpc.CallOption) (CategoryService_CreateCategoryStreamClient, error)
 	CreateCategoryStreamBidirectional(ctx context.Context, opts ...grpc.CallOption) (CategoryService_CreateCategoryStreamBidirectionalClient, error)
-	ListCategories(ctx context.Context, in *Blank, opts ...grpc.CallOption) (*CategoryList, error)
+	ListCategories(ctx context.Context, in *CategoryListRequest, opts ...grpc.CallOption) (*CategoryList, error)
 	GetCategory(ctx context.Context, in *CategoryGetRequest, opts ...grpc.CallOption) (*Category, error)
 }
 
@@ -111,7 +111,7 @@ func (x *categoryServiceCreateCategoryStreamBidirectionalClient) Recv() (*Catego
 	return m, nil
 }
 
-func (c *categoryServiceClient) ListCategories(ctx context.Context, in *Blank, opts ...grpc.CallOption) (*CategoryList, error) {
+func (c *categoryServiceClient) ListCategories(ctx context.Context, in *CategoryListRequest, opts ...grpc.CallOption) (*CategoryList, error) {
 	out := new(CategoryList)
 	err := c.cc.Invoke(ctx, "/pb.CategoryService/ListCategories", in, out, opts...)
 	if err != nil {
@@ -136,7 +136,7 @@ type CategoryServiceServer interface {
 	CreateCategory(context.Context, *CreateCategoryRequest) (*Category, error)
 	CreateCategoryStream(CategoryService_CreateCategoryStreamServer) error
 	CreateCategoryStreamBidirectional(CategoryService_CreateCategoryStreamBidirectionalServer) error
-	ListCategories(context.Context, *Blank) (*CategoryList, error)
+	ListCategories(context.Context, *CategoryListRequest) (*CategoryList, error)
 	GetCategory(context.Context, *CategoryGetRequest) (*Category, error)
 	mustEmbedUnimplementedCategoryServiceServer()
 }
@@ -154,7 +154,7 @@ func (UnimplementedCategoryServiceServer) CreateCategoryStream(CategoryService_C
 func (UnimplementedCategoryServiceServer) CreateCategoryStreamBidirectional(CategoryService_CreateCategoryStreamBidirectionalServer) error {
 	return status.Errorf(codes.Unimplemented, "method CreateCategoryStreamBidirectional not implemented")
 }
-func (UnimplementedCategoryServiceServer) ListCategories(context.Context, *Blank) (*CategoryList, error) {
+func (UnimplementedCategoryServiceServer) ListCategories(context.Context, *CategoryListRequest) (*CategoryList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCategories not implemented")
 }
 func (UnimplementedCategoryServiceServer) GetCategory(context.Context, *CategoryGetRequest) (*Category, error) {
@@ -244,7 +244,7 @@ func (x *categoryServiceCreateCategoryStreamBidirectionalServer) Recv() (*Create
 }
 
 func _CategoryService_ListCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Blank)
+	in := new(CategoryListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -256,7 +256,7 @@ func _CategoryService_ListCategories_Handler(srv interface{}, ctx context.Contex
 		FullMethod: "/pb.CategoryService/ListCategories",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CategoryServiceServer).ListCategories(ctx, req.(*Blank))
+		return srv.(CategoryServiceServer).ListCategories(ctx, req.(*CategoryListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -322,7 +322,7 @@ type CourseServiceClient interface {
 	CreateCourse(ctx context.Context, in *CreateCourseRequest, opts ...grpc.CallOption) (*Course, error)
 	CreateCourseStream(ctx context.Context, opts ...grpc.CallOption) (CourseService_CreateCourseStreamClient, error)
 	CreateCourseStreamBidirectional(ctx context.Context, opts ...grpc.CallOption) (CourseService_CreateCourseStreamBidirectionalClient, error)
-	ListCourses(ctx context.Context, in *Blank, opts ...grpc.CallOption) (*CourseList, error)
+	ListCourses(ctx context.Context, in *CourseListRequest, opts ...grpc.CallOption) (*CourseList, error)
 	GetCourse(ctx context.Context, in *CourseGetRequest, opts ...grpc.CallOption) (*Course, error)
 }
 
@@ -408,7 +408,7 @@ func (x *courseServiceCreateCourseStreamBidirectionalClient) Recv() (*Course, er
 	return m, nil
 }
 
-func (c *courseServiceClient) ListCourses(ctx context.Context, in *Blank, opts ...grpc.CallOption) (*CourseList, error) {
+func (c *courseServiceClient) ListCourses(ctx context.Context, in *CourseListRequest, opts ...grpc.CallOption) (*CourseList, error) {
 	out := new(CourseList)
 	err := c.cc.Invoke(ctx, "/pb.CourseService/ListCourses", in, out, opts...)
 	if err != nil {
@@ -433,7 +433,7 @@ type CourseServiceServer interface {
 	CreateCourse(context.Context, *CreateCourseRequest) (*Course, error)
 	CreateCourseStream(CourseService_CreateCourseStreamServer) error
 	CreateCourseStreamBidirectional(CourseService_CreateCourseStreamBidirectionalServer) error
-	ListCourses(context.Context, *Blank) (*CourseList, error)
+	ListCourses(context.Context, *CourseListRequest) (*CourseList, error)
 	GetCourse(context.Context, *CourseGetRequest) (*Course, error)
 	mustEmbedUnimplementedCourseServiceServer()
 }
@@ -451,7 +451,7 @@ func (UnimplementedCourseServiceServer) CreateCourseStream(CourseService_CreateC
 func (UnimplementedCourseServiceServer) CreateCourseStreamBidirectional(CourseService_CreateCourseStreamBidirectionalServer) error {
 	return status.Errorf(codes.Unimplemented, "method CreateCourseStreamBidirectional not implemented")
 }
-func (UnimplementedCourseServiceServer) ListCourses(context.Context, *Blank) (*CourseList, error) {
+func (UnimplementedCourseServiceServer) ListCourses(context.Context, *CourseListRequest) (*CourseList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCourses not implemented")
 }
 func (UnimplementedCourseServiceServer) GetCourse(context.Context, *CourseGetRequest) (*Course, error) {
@@ -541,7 +541,7 @@ func (x *courseServiceCreateCourseStreamBidirectionalServer) Recv() (*CreateCour
 }
 
 func _CourseService_ListCourses_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Blank)
+	in := new(CourseListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -553,7 +553,7 @@ func _CourseService_ListCourses_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: "/pb.CourseService/ListCourses",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CourseServiceServer).ListCourses(ctx, req.(*Blank))
+		return srv.(CourseServiceServer).ListCourses(ctx, req.(*CourseListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

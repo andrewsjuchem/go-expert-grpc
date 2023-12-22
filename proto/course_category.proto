@@ -5,7 +5,6 @@ import "google/protobuf/field_mask.proto";
 
 message blank{}
 
-
 message Category {
     string id = 1;
     string name = 2;
@@ -27,11 +26,15 @@ message CategoryGetRequest {
     google.protobuf.FieldMask field_mask = 2;
 }
 
+message CategoryListRequest {
+    google.protobuf.FieldMask field_mask = 1;
+}
+
 service CategoryService {
     rpc CreateCategory(CreateCategoryRequest) returns (Category) {}
     rpc CreateCategoryStream(stream CreateCategoryRequest) returns (CategoryList) {}
     rpc CreateCategoryStreamBidirectional(stream CreateCategoryRequest) returns (stream Category) {}
-    rpc ListCategories(blank) returns (CategoryList) {}
+    rpc ListCategories(CategoryListRequest) returns (CategoryList) {}
     rpc GetCategory(CategoryGetRequest) returns (Category) {}
 }
 
@@ -55,12 +58,17 @@ message CourseList {
 
 message CourseGetRequest {
     string id = 1;
+    google.protobuf.FieldMask field_mask = 2;
+}
+
+message CourseListRequest {
+    google.protobuf.FieldMask field_mask = 1;
 }
 
 service CourseService {
     rpc CreateCourse(CreateCourseRequest) returns (Course) {}
     rpc CreateCourseStream(stream CreateCourseRequest) returns (CourseList) {}
     rpc CreateCourseStreamBidirectional(stream CreateCourseRequest) returns (stream Course) {}
-    rpc ListCourses(blank) returns (CourseList) {}
+    rpc ListCourses(CourseListRequest) returns (CourseList) {}
     rpc GetCourse(CourseGetRequest) returns (Course) {}
 }

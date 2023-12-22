@@ -6,6 +6,7 @@ import (
 
 	"github.com/andrewsjuchem/go-expert-grpc/internal/database"
 	"github.com/andrewsjuchem/go-expert-grpc/internal/pb"
+	fmutils "github.com/mennanov/fmutils"
 )
 
 type CourseService struct {
@@ -35,7 +36,7 @@ func (c *CourseService) CreateCourse(ctx context.Context, req *pb.CreateCourseRe
 	return courseResponse, nil
 }
 
-func (c *CourseService) ListCourses(ctx context.Context, req *pb.Blank) (*pb.CourseList, error) {
+func (c *CourseService) ListCourses(ctx context.Context, req *pb.CourseListRequest) (*pb.CourseList, error) {
 	courses, err := c.CourseDB.FindAll()
 	if err != nil {
 		return nil, err
@@ -50,6 +51,11 @@ func (c *CourseService) ListCourses(ctx context.Context, req *pb.Blank) (*pb.Cou
 			Description: course.Description,
 			CategoryId:  course.CategoryID,
 		}
+
+		if req.FieldMask != nil {
+			fmutils.Filter(courseResponse, req.FieldMask.Paths)
+		}
+
 		coursesResponse = append(coursesResponse, courseResponse)
 	}
 
@@ -67,6 +73,10 @@ func (c *CourseService) GetCourse(ctx context.Context, req *pb.CourseGetRequest)
 		Name:        course.Name,
 		Description: course.Description,
 		CategoryId:  course.CategoryID,
+	}
+
+	if req.FieldMask != nil {
+		fmutils.Filter(courseResponse, req.FieldMask.Paths)
 	}
 
 	return courseResponse, nil
