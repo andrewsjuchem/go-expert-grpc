@@ -2,14 +2,19 @@
 
 ## Running the app
 
-Starting the server.
+Starting the Go gRPC server.
 ```
 go run cmd/grpcServer/main.go
 ```
 
-Running the client.
+Running the Go gRPC client.
 ```
 go run cmd/grpcClient/main.go
+```
+
+Running the Node gRPC client.
+```
+node cmd/grpcClientNode/main.js
 ```
 
 ## Testing with Postman
@@ -60,4 +65,10 @@ When it is the first time running the application, create the tables in the data
 sqlite3 db.sqlite
 CREATE TABLE categories (id string, name string, description);
 CREATE TABLE courses (id string, name string, description, string, category_id string);
+```
+
+Before running the Node gRPC client, the packages have to be installed.
+```
+cd cmd/grpcClientNode
+npm install
 ```
